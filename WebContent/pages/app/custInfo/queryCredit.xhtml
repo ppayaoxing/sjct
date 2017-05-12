@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:q="http://www.qfw.com/jsf/ui" xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://www.qfw.com/jsf/fn">
+<ui:composition template="/templates/main.xhtml">
+	<ui:define name="head">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript"
+			src="#{request.contextPath}/js/jquery.idTabs.min.js"></script>
+		<style type="text/css">
+.dfinput {
+	width: 200px;
+}
+</style>
+	</ui:define>
+	<ui:define name="body">
+		<div class="formbody">
+			<div class="formtitle">
+				<span>信用报告</span>
+			</div>
+			<h:form id="loanForm">
+				<p:growl globalOnly="true"></p:growl>
+				<p:growl autoUpdate="true"></p:growl>
+				<ul class="forminfo">
+					<li style="clear: both; float: left;"><h:outputLabel value="报告编号：" /> <h:outputLabel
+							value="#{custInfoCreditBean.credit.reportinfo.reportSN}"></h:outputLabel></li>
+					<li style="clear: both; float: left;"><h:outputLabel value="报告时间：" /><h:outputLabel
+							value="#{custInfoCreditBean.credit.reportinfo.reporttime}"></h:outputLabel></li>
+					<li style="clear: right;"><h:outputLabel value="查询时间：" /> <h:outputLabel
+							value="#{custInfoCreditBean.credit.reportinfo.querytime}"></h:outputLabel></li>
+					
+					<li style="clear: both; float: left;"><h:outputLabel value="证件类型：" /> <h:outputLabel
+							value="#{custInfoCreditBean.credit.personalinfo.IDtype}"></h:outputLabel></li>
+					<li style="clear: right;"><h:outputLabel value="证件号码：" /> <h:outputLabel
+							value="#{custInfoCreditBean.credit.personalinfo.IDnumber}"></h:outputLabel></li>
+							
+					<li style="clear: both; float: left;"><h:outputLabel value="姓名：" /> <h:outputLabel
+							value="#{custInfoCreditBean.credit.personalinfo.name}"></h:outputLabel></li>
+					<li style="clear: right;"><h:outputLabel value="婚姻状态：" /> <h:outputLabel
+							value="#{custInfoCreditBean.credit.personalinfo.marital}"></h:outputLabel></li>
+				</ul>
+				<br />
+				<div style="clear: both" id="usual1" class="usual">
+					<div class="itab">
+						<ul>
+							<li><a href="#tab1" class="selected">逾期记录</a></li>
+							<li><a href="#tab2">负债记录</a></li>
+							<li><a href="#tab3">信贷历史</a></li>
+							<li><a href="#tab4">信贷需求</a></li>
+							<li><a href="#tab5">其他</a></li>
+						</ul>
+					</div>
+				</div>
+				<div id="tab1" class="tabson" title="逾期记录">
+					<ul class="forminfo">
+					
+						<li style="clear: both; float: left;"><h:outputLabel value="逾期信用卡机构数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.overdues.creditOrgCounts}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="逾期金额大于200的信用卡机构数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.overdues.creditOrgCounts200}"></h:outputLabel></li>
+					
+						<li style="clear: both; float: left;"><h:outputLabel value="总信用卡逾期金额：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.overdues.creditAmts}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="大于200元的信用卡逾期总金额：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.overdues.creditAmts200}"></h:outputLabel></li>
+					
+						<li style="clear: both; float: left;"><h:outputLabel value="信用卡60个月内逾期次数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.overdues.creditCountsM60}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="信用卡60个月内逾期超过90天的次数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.overdues.creditCountsM60D90}"></h:outputLabel></li>
+					
+						<li style="clear: both; float: left;"><h:outputLabel value="贷款总笔数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.overdues.loanCounts}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="贷款总金额：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.overdues.loanAmts}"></h:outputLabel></li>
+					
+						<li style="clear: both; float: left;"><h:outputLabel value="贷款60个月内逾期次数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.overdues.loanCountsM60}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="/贷款60个月内逾期超过90天的次数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.overdues.loanCountsM60D90}"></h:outputLabel></li>
+					
+						<li style="clear: both; float: left;"><h:outputLabel value="60个月内逾期记录总数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.overdues.countsM60}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="60个月内超过90天逾期总数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.overdues.countsM60D90}"></h:outputLabel></li>
+					</ul>
+				</div>
+
+				<!-- tab2 -->
+				<div id="tab2" class="tabson" title="负债记录">
+					<ul class="forminfo">
+							
+						<li style="clear: both; float: left;"><h:outputLabel value="信用卡限额最大额额度：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.creditLimitMax}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="信用卡限额总额度：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.creditLimitTotal}"></h:outputLabel></li>
+								
+						<li style="clear: both; float: left;"><h:outputLabel value="信用卡机构总数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.creditOrgCounts}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="已使用额度 + 逾期金额：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.creditLimitUsed}"></h:outputLabel></li>
+								
+						<li style="clear: both; float: left;"><h:outputLabel value="信用卡额度使用率：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.creditLimitUseRate}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="贷款总额（包括已结清和未结清）：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.loanAmts}"></h:outputLabel></li>
+								
+						<li style="clear: both; float: left;"><h:outputLabel value="未结清贷款总额：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.loanAmtsNoSettle}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="贷款总笔数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.loanCounts}"></h:outputLabel></li>
+								
+						<li style="clear: both; float: left;"><h:outputLabel value="贷款总余额：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.loanBalances}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="未结清贷款总笔数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.loanBalanceCounts}"></h:outputLabel></li>
+								
+						<li style="clear: both; float: left;"><h:outputLabel value="房贷总余额：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.loanBalancesMortgage}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="车贷总余额：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.loanBalancesCar}"></h:outputLabel></li>
+								
+						<li style="clear: both; float: left;"><h:outputLabel value="经营贷总余额：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.loanBalancesBiz}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="其他贷总余额：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.loanBalancesOther}"></h:outputLabel></li>
+								
+						<li style="clear: both; float: left;"><h:outputLabel value="月还贷款总额：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.loanBalancesMonth}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="月还房贷金额：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.loanBalancesMortgageMonth}"></h:outputLabel></li>
+								
+						<li style="clear: both; float: left;"><h:outputLabel value="月还车贷：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.loanBalancesCarMonth}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="月还经营贷：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.loanBalancesBizMonth}"></h:outputLabel></li>
+								
+						<li style="clear: both; float: left;"><h:outputLabel value="月还其他贷总余额：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.debts.loanBalancesOtherMonth}"></h:outputLabel></li>
+								
+						<ul class="forminfo">
+							<div style="clear: both" class="formtitle">
+								<span>贷款余额详列</span>
+							</div>
+	
+							<h:panelGroup id="contactTable">
+								<p:dataTable var="loanBalanceInfo" emptyMessage="暂无信息" rowIndexVar="index"
+									value="#{custInfoCreditBean.credit.debts.loanBalanceInfos}"
+									style="width:100%" cellpadding="0" cellspacing="0">
+									<p:column headerText="放贷机构">
+										<h:outputText value="#{loanBalanceInfo.org}" />
+									</p:column>
+									<p:column headerText="放贷类型">
+										<h:outputText value="#{loanBalanceInfo.type}" />
+									</p:column>
+									<p:column headerText="放贷总额">
+										<h:outputText value="#{loanBalanceInfo.amts}" />
+									</p:column>
+									<p:column headerText="放贷余额">
+										<h:outputText value="#{loanBalanceInfo.balances}" />
+									</p:column>
+									<p:column headerText="未偿月数">
+										<h:outputText value="#{loanBalanceInfo.debtMonths}" />
+									</p:column>
+								</p:dataTable>
+							</h:panelGroup>
+						</ul>
+					</ul>
+				</div>
+				<div id="tab3" class="tabson" title="信贷历史">
+					<ul class="forminfo">
+						<li style="clear: both; float: left;"><h:outputLabel value="信用卡最大账龄(单位月)：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.creditLoanHis.creditMOB}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="贷款最大账龄(单位月)：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.creditLoanHis.loanMOB}"></h:outputLabel></li>
+					</ul>
+				</div>
+				<div id="tab4" class="tabson" title="信贷需求">
+					<ul class="forminfo">
+						<li style="clear: both; float: left;"><h:outputLabel value="近3个月信用卡发卡机构数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.creditLoanNeeds.creditOrgCountsM3}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="近3个月信用卡额度总额：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.creditLoanNeeds.creditLimitTotalM3}"></h:outputLabel></li>
+								
+						<li style="clear: both; float: left;"><h:outputLabel value="近3个月贷款笔数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.creditLoanNeeds.loanCountsM3}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="近3个月贷款金额数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.creditLoanNeeds.loanAmtsM3}"></h:outputLabel></li>
+								
+						<li style="clear: both; float: left;"><h:outputLabel value="近3月贷款审核查询次数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.creditLoanNeeds.loanQueriesM3}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="近3月本人查询次数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.creditLoanNeeds.selfQueriesM3}"></h:outputLabel></li>
+					</ul>
+				</div>
+				<div id="tab5" class="tabson" title="其他">
+					<ul class="forminfo">
+						<li style="clear: both; float: left;"><h:outputLabel value="担保笔数：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.others.guarantees}"></h:outputLabel></li>
+						<li style="clear: right;"><h:outputLabel value="担保金额：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.others.guaranteeAmts}"></h:outputLabel></li>
+								
+						<li style="clear: both; float: left;"><h:outputLabel value="6月内欠税总金额：" /> <h:outputLabel
+								value="#{custInfoCreditBean.credit.others.month6TaxAmts}"></h:outputLabel></li>
+					</ul>
+				</div>
+				<div style="clear: both;">
+					<ul class="forminfo" id="submitButton">
+						<li><label>&nbsp;</label>
+							<p:commandButton styleClass="btn" value="关闭" type="button"
+								onclick="closeParMainDialog();"></p:commandButton></li>
+					</ul>
+					<br /> <br />
+				</div>
+			</h:form>
+		</div>
+		<script type="text/javascript">
+			$("#usual1 ul").idTabs();
+		</script>
+	</ui:define>
+</ui:composition>
+</html>
